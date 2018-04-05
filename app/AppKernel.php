@@ -24,6 +24,11 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            
+            new Smart\SonataBundle\SmartSonataBundle(),
+            new Smart\AuthenticationBundle\SmartAuthenticationBundle(),
+
             new AppBundle\AppBundle(),
         ];
 

@@ -19,4 +19,13 @@ sonata_admin:
 
     templates:
         layout: admin/layout.html.twig
+        user_block: "@SmartSonata/block/user.html.twig"
 
+    dashboard:
+        groups:
+            users:
+                label: dashboard.label_users
+                label_catalogue: admin
+                icon: '<i class="fa fa-users"></i>'
+                items:
+                    - admin.user.administrator
