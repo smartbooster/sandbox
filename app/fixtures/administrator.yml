@@ -1,0 +1,11 @@
+AppBundle\Entity\User\Administrator:
+    admin:
+        email:          admin@smartbooster.io
+        lastName:       MIN
+        firstName:      Ad
+        plainPassword:  admin
+    admin{1..10}:
+        email:          '<email()>'
+        lastName:       '<lastName()>'
+        firstName:      '<firstName()>'
+        plainPassword:  admin

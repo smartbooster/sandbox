@@ -1,0 +1,13 @@
+admin_security_login_form:
+    path:    /login
+    methods: [GET]
+    defaults:
+        _controller: AppBundle:Admin/Security:login
+
+admin_security_login_check:
+    path:    /login_check
+    methods: [POST]
+
+admin_security_logout:
+    path:    /logout
+    methods: [GET]

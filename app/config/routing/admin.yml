@@ -6,3 +6,5 @@ _sonata_admin:
     type: sonata_admin
     prefix: /admin
 
+security:
+    resource: admin/security.yml

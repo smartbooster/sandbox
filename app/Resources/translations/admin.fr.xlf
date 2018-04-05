@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="dashboard.label_users">
+                <source>dashboard.label_users</source>
+                <target>Utilisateurs</target>
+            </trans-unit>
+            <trans-unit id="dashboard.label_administrator">
+                <source>dashboard.label_administrator</source>
+                <target>Administrateurs</target>
+            </trans-unit>
+            <trans-unit id="breadcrumb.link_administrator_list">
+                <source>breadcrumb.link_administrator_list</source>
+                <target>Liste des administrateurs</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
