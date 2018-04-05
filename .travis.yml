@@ -1,0 +1,16 @@
+language: php
+
+php:
+  - 7.1
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  - composer self-update
+
+install: composer update --prefer-source
+
+script:
+  - vendor/bin/phpcs  --extensions=php --encoding=utf-8 --standard=PSR2 -np src tests
