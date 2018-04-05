@@ -18,3 +18,4 @@
 /web/build/
 yarn-error.log
 /node_modules
+composer.lock

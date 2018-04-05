@@ -1,7 +1,15 @@
 {
-    "name": "nicolasbastien/sandbox",
-    "license": "proprietary",
+    "name": "smartbooster/sandbox",
     "type": "project",
+    "homepage": "https://github.com/smartbooster/sandbox",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nicolas Bastien",
+            "email": "nicolas.bastien@smartbooster.io",
+            "homepage": "https://smartbooster.io"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "AppBundle\\": "src/AppBundle"
