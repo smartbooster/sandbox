@@ -2,6 +2,13 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="fr" datatype="plaintext" original="file.ext">
         <body>
+            <!-- Menu -->
+            <trans-unit id="menu.profile.link">
+                <source>menu.profile.link</source>
+                <target>Mon compte</target>
+            </trans-unit>
+
+            <!-- Dashboard -->
             <trans-unit id="dashboard.label_users">
                 <source>dashboard.label_users</source>
                 <target>Utilisateurs</target>
