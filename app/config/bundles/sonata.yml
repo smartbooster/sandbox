@@ -19,7 +19,7 @@ sonata_admin:
 
     templates:
         layout: admin/layout.html.twig
-        user_block: "@SmartSonata/block/user.html.twig"
+        user_block: "@SmartAuthentication/block/user.html.twig"
 
     dashboard:
         groups:

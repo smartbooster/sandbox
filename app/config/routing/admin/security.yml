@@ -11,3 +11,9 @@ admin_security_login_check:
 admin_security_logout:
     path:    /logout
     methods: [GET]
+
+admin_security_profile:
+    path:    /profile
+    methods: [GET, POST]
+    defaults:
+        _controller: AppBundle:Admin/Security:profile
