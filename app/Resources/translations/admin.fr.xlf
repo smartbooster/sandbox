@@ -8,7 +8,7 @@
                 <target>Mon compte</target>
             </trans-unit>
 
-            <!-- Dashboard -->
+            <!--  Dashboard & navigation -->
             <trans-unit id="dashboard.label_users">
                 <source>dashboard.label_users</source>
                 <target>Utilisateurs</target>
@@ -20,6 +20,16 @@
             <trans-unit id="breadcrumb.link_administrator_list">
                 <source>breadcrumb.link_administrator_list</source>
                 <target>Liste des administrateurs</target>
+            </trans-unit>
+
+            <!-- Form fieldset -->
+            <trans-unit id="fieldset.label_general">
+                <source>fieldset.label_general</source>
+                <target>Informations générales</target>
+            </trans-unit>
+            <trans-unit id="fieldset.label_password">
+                <source>fieldset.label_password</source>
+                <target>Mot de passe</target>
             </trans-unit>
         </body>
     </file>
