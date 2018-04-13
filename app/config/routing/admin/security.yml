@@ -12,6 +12,18 @@ admin_security_logout:
     path:    /logout
     methods: [GET]
 
+admin_security_forgot_password:
+    path:    /forgot_password
+    methods: [GET, POST]
+    defaults:
+        _controller: AppBundle:Admin/Security:forgotPassword
+
+admin_security_reset_password:
+    path:    /reset_password
+    methods: [GET, POST]
+    defaults:
+        _controller: AppBundle:Admin/Security:resetPassword
+
 admin_security_profile:
     path:    /profile
     methods: [GET, POST]

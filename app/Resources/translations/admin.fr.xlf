@@ -21,6 +21,10 @@
                 <source>breadcrumb.link_administrator_list</source>
                 <target>Liste des administrateurs</target>
             </trans-unit>
+            <trans-unit id="breadcrumb.link_administrator_create">
+                <source>breadcrumb.link_administrator_create</source>
+                <target>Création d'un administrateur</target>
+            </trans-unit>
 
             <!-- Form fieldset -->
             <trans-unit id="fieldset.label_general">

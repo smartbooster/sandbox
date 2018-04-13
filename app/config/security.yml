@@ -7,6 +7,10 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
+        admin_user_provider:
+            chain:
+                providers:
+                    - administrator_by_email
         administrator_by_email:
             entity: { class: AppBundle:User\Administrator, property: email }
 
@@ -37,6 +41,9 @@ security:
 
     access_control:
         - { path: ^/login$,           roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/forgot_password,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/reset_password,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/set_password,     roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/,                 roles: [ROLE_ADMINISTRATOR, IS_AUTHENTICATED_REMEMBERED], host: admin.%domain% }
 
 
