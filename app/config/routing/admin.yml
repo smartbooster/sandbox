@@ -8,3 +8,10 @@ _sonata_admin:
 
 security:
     resource: admin/security.yml
+
+admin_dashboard:
+    path:    /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sonata_admin_dashboard
+        permanent: true

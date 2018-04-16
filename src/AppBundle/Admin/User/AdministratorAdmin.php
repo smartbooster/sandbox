@@ -3,10 +3,13 @@
 namespace AppBundle\Admin\User;
 
 use AppBundle\Entity\User\Administrator;
+use Smart\AuthenticationBundle\Security\Token;
 use Smart\SonataBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Yokai\MessengerBundle\Sender\SenderInterface;
+use Yokai\SecurityTokenBundle\Manager\TokenManagerInterface;
 
 /**
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
@@ -84,5 +87,40 @@ class AdministratorAdmin extends AbstractAdmin
                 )
             ->end()
         ;
+    }
+
+    /**
+     * @param Administrator $object
+     */
+    public function postPersist($object)
+    {
+        $token = $this->getTokenManager()->create(Token::RESET_PASSWORD, $object);
+
+        $this->getMessenger()->send(
+            'security.user_created',
+            $object,
+            [
+                '{context}' => 'admin',
+                'token' => $token->getValue(),
+                'domain' => $this->getConfigurationPool()->getContainer()->getParameter('domain'),
+                'security_reset_password_route' => 'admin_security_reset_password'
+            ]
+        );
+    }
+
+    /**
+     * @return TokenManagerInterface
+     */
+    private function getTokenManager()
+    {
+        return $this->get('yokai_security_token.token_manager');
+    }
+
+    /**
+     * @return SenderInterface
+     */
+    protected function getMessenger()
+    {
+        return $this->get('yokai_messenger.sender');
     }
 }

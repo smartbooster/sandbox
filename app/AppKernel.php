@@ -28,6 +28,8 @@ class AppKernel extends Kernel
             
             new Smart\SonataBundle\SmartSonataBundle(),
             new Smart\AuthenticationBundle\SmartAuthenticationBundle(),
+            new Yokai\SecurityTokenBundle\YokaiSecurityTokenBundle(),
+            new Yokai\MessengerBundle\YokaiMessengerBundle(),
 
             new AppBundle\AppBundle(),
         ];

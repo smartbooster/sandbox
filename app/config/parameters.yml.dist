@@ -19,3 +19,4 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     domain: localhost
+    mail_from: sandbox@mail.com

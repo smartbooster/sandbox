@@ -1,0 +1,24 @@
+yokai_messenger:
+    channels:
+        swiftmailer:
+            from: "%mail_from%"
+            translator_catalog: email
+    messages:
+        -
+            id:       security.forgot_password
+            channels: swiftmailer
+            defaults:
+                subject:             security.forgot_password.subject
+                template:            email/{context}/security/forgot_password.html.twig
+                template_parameters: [ '{context}' ]
+                template_vars:       [ token ]
+                translation_catalog: email
+        -
+            id:       security.user_created
+            channels: swiftmailer
+            defaults:
+                subject:             security.user_created.subject
+                template:            email/{context}/security/user_created.html.twig
+                template_parameters: [ '{context}' ]
+                template_vars:       [ token ]
+                translation_catalog: email
