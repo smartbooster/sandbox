@@ -45,6 +45,7 @@ class AdministratorAdmin extends AbstractAdmin
             ->addIdentifier('email', null, ['label' => 'form.label_email'])
             ->add('firstName', null, ['label' => 'form.label_first_name'])
             ->add('lastName', null, ['label' => 'form.label_last_name'])
+            ->add('lastLogin', null, ['label' => 'form.label_last_login'])
         ;
     }
 
@@ -58,6 +59,7 @@ class AdministratorAdmin extends AbstractAdmin
                 ->add('email', null, ['label' => 'form.label_email'])
                 ->add('firstName', null, ['label' => 'form.label_first_name'])
                 ->add('lastName', null, ['label' => 'form.label_last_name'])
+                ->add('lastLogin', null, ['label' => 'form.label_last_login'])
             ->end()
         ;
     }

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\User;
 
 use Smart\AuthenticationBundle\Entity\User\UserTrait;
+use Smart\AuthenticationBundle\Security\LastLoginInterface;
 use Smart\AuthenticationBundle\Security\SmartUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,7 +14,7 @@ use Yokai\MessengerBundle\Recipient\SwiftmailerRecipientInterface;
  * @ORM\Table(name="administrator")
  * @UniqueEntity(fields={"email"})
  */
-class Administrator implements SmartUserInterface, \Serializable, SwiftmailerRecipientInterface
+class Administrator implements SmartUserInterface, \Serializable, SwiftmailerRecipientInterface, LastLoginInterface
 {
     use UserTrait;
 
