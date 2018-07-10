@@ -1,0 +1,5 @@
+{% if is_granted('ROLE_ALLOWED_TO_SWITCH') and (is_granted('ROLE_PREVIOUS_ADMIN') == false) and app.user.email != object.email %}
+    <a href="{{ path('sonata_admin_dashboard', {"_switch_user": object.email}) }}" class="btn btn-xs btn-default" title="{{ 'list.action_impersonate'|trans({}, 'admin') }}">
+        <i class="fa fa-user"></i>
+    </a>
+{% endif %}

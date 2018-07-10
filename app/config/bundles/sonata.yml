@@ -21,6 +21,11 @@ sonata_admin:
         layout: admin/layout.html.twig
         user_block: "@SmartAuthentication/block/user.html.twig"
 
+    extensions:
+        admin.extension.action_impersonate:
+            instanceof:
+                - AppBundle\Entity\User\Administrator
+
     dashboard:
         groups:
             users:
