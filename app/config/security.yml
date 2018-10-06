@@ -53,3 +53,4 @@ security:
         ROLE_ADMINISTRATOR:
             - ROLE_ADMIN
             - ROLE_ADMIN_ADMINISTRATOR
+            - ROLE_ALLOWED_TO_SWITCH

@@ -35,6 +35,12 @@
                 <source>fieldset.label_password</source>
                 <target>Mot de passe</target>
             </trans-unit>
+
+            <!-- List Action -->
+            <trans-unit id="list.action_impersonate">
+                <source>list.action_impersonate</source>
+                <target>Se connecter en tant que</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
