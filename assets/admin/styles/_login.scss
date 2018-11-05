@@ -1,0 +1,12 @@
+html.login, html.login body {
+  //  Add your background url image on the line bellow
+  background: $skin-login-background-color no-repeat center fixed;
+  background-size: cover;
+  .wrapper {
+    background: none;
+  }
+
+  .login-box-body {
+    box-shadow: 3px 3px 0 rgba(12,12,12,.3);
+  }
+} 
