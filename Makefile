@@ -30,3 +30,34 @@ install:
 	 composer install
 	 make dev.assets
 	 make orm.install
+
+# ====================
+## Docker
+
+SHELL = /bin/sh
+
+HOST_USER := $(shell id -u)
+HOST_GROUP := $(shell id -g)
+
+export HOST_USER
+export HOST_GROUP
+
+APPLICATION := smartbooster-sandbox
+
+up:
+	docker-compose up
+
+down:
+	docker-compose down
+
+ps:
+	docker-compose ps
+
+ssh:
+	docker exec -it $(APPLICATION)-docker-php bash
+
+nginx:
+	docker exec -it --user=www-data ${APPLICATION}-docker-nginx bash
+
+mysql:
+	docker exec -it --user=mysql ${APPLICATION}-docker-mysql bash
