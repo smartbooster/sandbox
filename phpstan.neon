@@ -1,0 +1,9 @@
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+
+parameters:
+    symfony:
+        container_xml_path: %rootDir%/../../../var/cache/test/appTestDebugProjectContainer.xml

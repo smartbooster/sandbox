@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 // If you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read https://symfony.com/doc/current/setup.html#checking-symfony-application-configuration-and-setup
 // for more information
-//umask(0000);
+umask(0000); //NBN: https://symfony.com/doc/current/setup/file_permissions.html
 
 // This check prevents access to debug front controllers that are deployed by accident to production servers.
 // Feel free to remove this, extend it, or make something more sophisticated.

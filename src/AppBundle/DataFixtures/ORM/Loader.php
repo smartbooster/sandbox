@@ -4,8 +4,8 @@ namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-
 use Nelmio\Alice\Fixtures;
+use Nelmio\Alice\ProcessorInterface;
 use Smart\AuthenticationBundle\DataFixtures\Processor\UserProcessor;
 use Symfony\Bridge\Doctrine\Tests\Fixtures\ContainerAwareFixture;
 
@@ -20,7 +20,9 @@ class Loader extends ContainerAwareFixture implements FixtureInterface
     private $fixturesDir;
 
     /**
-     * {@inheritdoc}
+     * @param ObjectManager $manager
+     *
+     * @return void
      */
     public function load(ObjectManager $manager)
     {
@@ -30,7 +32,7 @@ class Loader extends ContainerAwareFixture implements FixtureInterface
     }
 
     /**
-     * @return array
+     * @return array<string>
      */
     protected function getFiles()
     {
@@ -42,7 +44,7 @@ class Loader extends ContainerAwareFixture implements FixtureInterface
     }
 
     /**
-     * @return array
+     * @return array<ProcessorInterface>
      */
     protected function getProcessors()
     {
