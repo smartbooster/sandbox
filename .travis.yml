@@ -30,6 +30,7 @@ script:
   - make qualimetry
   - vendor/bin/phpunit tests --coverage-clover=coverage.clover
   - make orm.status ENV=test
+  - yarn run encore production
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar

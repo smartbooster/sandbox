@@ -19,4 +19,5 @@
 yarn-error.log
 /node_modules
 composer.lock
+yarn.lock
 .env

@@ -31,6 +31,7 @@ deploy.assets:
 
 install:
 	 composer install
+	 yarn install
 	 make dev.assets
 	 make orm.install
 
