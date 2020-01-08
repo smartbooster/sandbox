@@ -1,16 +1,34 @@
 language: php
 
 php:
-  - 7.1
+  - 7.3
+
+env:
+  global:
+    - SYMFONY_ENV="test"
+
+services:
+  - mysql
 
 cache:
   directories:
     - $HOME/.composer/cache
 
 before_install:
+  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - composer self-update
+  - cp ci/parameters.yml.build.dist app/config/parameters.yml
 
-install: composer update --prefer-source
+install:
+  - export SYMFONY_ENV="test"
+  - composer install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction
+  - make orm.install ENV=test
 
 script:
-  - vendor/bin/phpcs  --extensions=php --encoding=utf-8 --standard=PSR2 -np src tests
+  - make qualimetry
+  - vendor/bin/phpunit tests --coverage-clover=coverage.clover
+  - make orm.status ENV=test
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover

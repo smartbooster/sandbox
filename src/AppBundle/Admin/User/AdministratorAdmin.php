@@ -27,7 +27,9 @@ class AdministratorAdmin extends AbstractAdmin
 
         if ($object instanceof Administrator) {
             // an ADMIN cannot delete himself
-            if ($name === static::ACTION_DELETE && $object->getId() === $this->getUser()->getId()) {
+            /** @var Administrator $currentUser */
+            $currentUser = $this->getUser(); //Trick for phpstan -> todo add this in SmartUserInterface and overide getUser()
+            if ($name === static::ACTION_DELETE && $object->getId() === $currentUser->getId()) {
                 return false;
             }
         }
@@ -36,7 +38,7 @@ class AdministratorAdmin extends AbstractAdmin
     }
 
     /**
-     * @inheritdoc
+     * @return void
      */
     protected function configureListFields(ListMapper $list)
     {
@@ -50,7 +52,7 @@ class AdministratorAdmin extends AbstractAdmin
     }
 
     /**
-     * @inheritDoc
+     * @return void
      */
     protected function configureShowFields(ShowMapper $show)
     {
@@ -65,7 +67,7 @@ class AdministratorAdmin extends AbstractAdmin
     }
 
     /**
-     * @inheritDoc
+     * @return void
      */
     protected function configureFormFields(FormMapper $form)
     {
@@ -93,6 +95,7 @@ class AdministratorAdmin extends AbstractAdmin
 
     /**
      * @param Administrator $object
+     * @return void
      */
     public function postPersist($object)
     {
