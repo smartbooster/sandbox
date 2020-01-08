@@ -13,6 +13,7 @@ services:
 cache:
   directories:
     - $HOME/.composer/cache
+    - $HOME/.cache/yarn
 
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
@@ -23,6 +24,7 @@ install:
   - export SYMFONY_ENV="test"
   - composer install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction
   - make orm.install ENV=test
+  - yarn install
 
 script:
   - make qualimetry
