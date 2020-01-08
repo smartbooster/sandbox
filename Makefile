@@ -31,6 +31,7 @@ deploy.assets:
 
 install:
 	 composer install
+	 yarn install
 	 make dev.assets
 	 make orm.install
 
@@ -97,7 +98,7 @@ ps:
 	docker-compose ps
 
 ssh:
-	docker exec -it $(APPLICATION)-docker-php bash
+	docker exec -it --user=dev $(APPLICATION)-docker-php bash
 
 nginx:
 	docker exec -it --user=www-data ${APPLICATION}-docker-nginx bash

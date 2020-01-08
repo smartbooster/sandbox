@@ -5,6 +5,7 @@ namespace AppBundle\Entity\User;
 use Smart\AuthenticationBundle\Entity\User\UserTrait;
 use Smart\AuthenticationBundle\Security\LastLoginInterface;
 use Smart\AuthenticationBundle\Security\SmartUserInterface;
+use Smart\EtlBundle\Entity\ImportableTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Yokai\MessengerBundle\Recipient\SwiftmailerRecipientInterface;
@@ -17,6 +18,7 @@ use Yokai\MessengerBundle\Recipient\SwiftmailerRecipientInterface;
 class Administrator implements SmartUserInterface, \Serializable, SwiftmailerRecipientInterface, LastLoginInterface
 {
     use UserTrait;
+    use ImportableTrait;
 
     /**
      * @var int
@@ -38,5 +40,17 @@ class Administrator implements SmartUserInterface, \Serializable, SwiftmailerRec
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImportId()
+    {
+        return sprintf(
+            '%s-%s',
+            strtolower($this->getFirstName()),
+            strtolower($this->getLastName())
+        );
     }
 }

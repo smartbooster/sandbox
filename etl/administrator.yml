@@ -1,0 +1,5 @@
+ADMINISTRATOR_JOHN_DOE:
+  email: john.doe@smartbooster.io
+  firstname: John
+  lastname: Doe
+  password: john.doe

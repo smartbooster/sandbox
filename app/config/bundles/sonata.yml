@@ -11,8 +11,9 @@ sonata_block:
 
 sonata_admin:
     title:          'SMART BOOSTER'
+    title_logo:     '/images/logo/smartbooster-logo.svg'
     options:
-        title_mode: 'single_text'
+        title_mode: 'single_image'
 
     security:
         handler: sonata.admin.security.handler.noop

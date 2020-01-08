@@ -16,6 +16,7 @@ Encore
     .enableSassLoader(function(sassOptions) {
         // https://github.com/sass/node-sass#options
         sassOptions.includePaths = ['vendor']
+        sassOptions.implementation = require('sass')
     }, {
         resolveUrlLoader: false
     })
@@ -25,6 +26,9 @@ Encore
     .autoProvidejQuery()
 
     .enableSourceMaps(!Encore.isProduction())
+
+    // https://symfony.com/blog/encore-0-21-0-webpack-4-support-copy-files-support-webpackencorebundle#new-runtime-js-file
+    .disableSingleRuntimeChunk()
 
     // empty the outputPath dir before each build
     .cleanupOutputBeforeBuild()
