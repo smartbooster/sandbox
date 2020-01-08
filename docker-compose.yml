@@ -4,7 +4,6 @@ services:
   php:
     container_name: ${APPLICATION}-docker-php
     image: smartbooster/php-fpm:builder
-    user: "${HOST_USER}:${HOST_GROUP}"
     env_file:
        - .env
     ports:
@@ -19,8 +18,6 @@ services:
         HOST_USER: ${HOST_USER}
         HOST_GROUP: ${HOST_GROUP}
     container_name: ${APPLICATION}-docker-nginx
-    env_file:
-       - .env
     ports:
       - "8080:80"
     volumes:
