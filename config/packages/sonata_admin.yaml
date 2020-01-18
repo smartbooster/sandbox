@@ -1,0 +1,31 @@
+sonata_admin:
+    title:          'SMART BOOSTER'
+    title_logo:     '/images/logo/smartbooster-logo.svg'
+    options:
+        title_mode: 'single_image'
+
+    security:
+        handler: sonata.admin.security.handler.noop
+
+    templates:
+        layout: admin/layout.html.twig
+        user_block: "@SmartAuthentication/block/user.html.twig"
+
+    extensions:
+        admin.extension.action_impersonate:
+            instanceof:
+                - App\Entity\User\Administrator
+
+    dashboard:
+        groups:
+            users:
+                label: dashboard.label_users
+                label_catalogue: admin
+                icon: '<i class="fa fa-users"></i>'
+                items:
+                    - admin.user.administrator
+
+sonata_block:
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]

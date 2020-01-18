@@ -6,6 +6,7 @@ php:
 env:
   global:
     - SYMFONY_ENV="test"
+    - DATABASE_URL="mysql://travis:@localhost:3306/smartbooster-sandbox?serverVersion=5.7"
 
 services:
   - mysql
@@ -18,7 +19,7 @@ cache:
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - composer self-update
-  - cp ci/parameters.yml.build.dist app/config/parameters.yml
+  - cp .env.travis .env
 
 install:
   - export SYMFONY_ENV="test"
