@@ -7,6 +7,8 @@ env:
   global:
     - SYMFONY_ENV="test"
     - DATABASE_URL="mysql://travis:@localhost:3306/smartbooster-sandbox?serverVersion=5.7"
+    - APP_MAIL_FROM=travis@smartbooster.io
+    - NGINX_HOST=localhost
 
 services:
   - mysql
@@ -29,7 +31,7 @@ install:
 
 script:
   - make qualimetry
-  - vendor/bin/phpunit tests --coverage-clover=coverage.clover
+  - bin/phpunit tests --coverage-clover=coverage.clover
   - make orm.status ENV=test
   - yarn run encore production
 

@@ -9,11 +9,11 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <server name="KERNEL_CLASS" value="AppKernel" />
-        <!--<env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />-->
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
 
         <!-- ###+ symfony/framework-bundle ### -->
-        <env name="APP_ENV" value="dev"/>
+        <server name="APP_ENV" value="test" force="true" />
         <env name="APP_SECRET" value="f149f438e8af101edd2d544386ca241f"/>
         <!-- env name="TRUSTED_PROXIES" value="127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16" -->
         <!-- env name="TRUSTED_HOSTS" value="'^localhost|example\.com$'" -->
@@ -55,4 +55,8 @@
             </exclude>
         </whitelist>
     </filter>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
 </phpunit>

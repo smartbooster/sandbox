@@ -11,5 +11,5 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class SecurityController extends AbstractSecurityController
 {
-    protected $context = 'admin';    
+    protected $context = 'admin';
 }

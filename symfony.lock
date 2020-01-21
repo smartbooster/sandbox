@@ -273,8 +273,14 @@
     "symfony/asset": {
         "version": "v4.4.2"
     },
+    "symfony/browser-kit": {
+        "version": "v5.0.3"
+    },
     "symfony/cache": {
         "version": "v4.4.2"
+    },
+    "symfony/cache-contracts": {
+        "version": "v2.0.1"
     },
     "symfony/config": {
         "version": "v4.4.2"
@@ -304,6 +310,9 @@
     "symfony/doctrine-bridge": {
         "version": "v4.4.2"
     },
+    "symfony/dom-crawler": {
+        "version": "v5.0.3"
+    },
     "symfony/dotenv": {
         "version": "v5.0.2"
     },
@@ -312,6 +321,9 @@
     },
     "symfony/event-dispatcher": {
         "version": "v4.4.2"
+    },
+    "symfony/event-dispatcher-contracts": {
+        "version": "v1.1.7"
     },
     "symfony/expression-language": {
         "version": "v4.4.2"
@@ -535,6 +547,9 @@
             "config/packages/translation.yaml",
             "translations/.gitignore"
         ]
+    },
+    "symfony/translation-contracts": {
+        "version": "v2.0.1"
     },
     "symfony/twig-bridge": {
         "version": "v4.4.2"

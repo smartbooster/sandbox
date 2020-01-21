@@ -5,6 +5,9 @@ cc:
 	bin/console --env=$(ENV) cache:clear
 	bin/console cache:warmup
 
+cct: override ENV=test
+cct: cc
+
 ## Database install
 orm.install:
 	bin/console --env=$(ENV) doctrine:database:drop --if-exists --force
@@ -74,7 +77,7 @@ composer.validate:
 	composer validate composer.json
 
 qa: qualimetry
-qualimetry: checkstyle lint.php lint.twig lint.yaml lint.container composer.validate metrics phpstan
+qualimetry: checkstyle lint.php lint.twig lint.yaml lint.xliff lint.container composer.validate metrics phpstan
 
 ## Qualimetry : code-beautifier
 cb: code-beautifier
