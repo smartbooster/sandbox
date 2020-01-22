@@ -1,0 +1,63 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\UserInterface: bcrypt
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        admin_user_provider:
+            chain:
+                providers:
+                    - administrator_by_email
+        administrator_by_email:
+            entity: { class: App:User\Administrator, property: email }
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            host:       admin.%domain%
+            pattern:   ^/
+            anonymous: true
+            provider:  administrator_by_email
+            switch_user: true
+            logout_on_user_change: true
+            form_login:
+                check_path: admin_security_login_check
+                login_path: admin_security_login_form
+            logout:
+                path:   admin_security_logout
+                target: admin_security_login_form
+            remember_me:
+                secret:                "%secret%"
+                lifetime:              31536000 # 365 days
+                path:                  /
+                domain:                admin.%domain%
+                remember_me_parameter: remember
+
+    access_control:
+        - { path: ^/login$,           roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/forgot_password,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/reset_password,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/set_password,     roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/,                 roles: [ROLE_ADMINISTRATOR, IS_AUTHENTICATED_REMEMBERED], host: admin.%domain% }
+
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ ROLE_SONATA_ADMIN ]
+
+        ROLE_ADMINISTRATOR:
+            - ROLE_ADMIN
+            - ROLE_ADMIN_ADMINISTRATOR
+            - ROLE_ALLOWED_TO_SWITCH
+
+services:
+    admin_user_provider:
+        alias: 'security.user.provider.concrete.admin_user_provider'
+        public: true
+
+

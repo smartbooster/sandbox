@@ -6,6 +6,9 @@ php:
 env:
   global:
     - SYMFONY_ENV="test"
+    - DATABASE_URL="mysql://travis:@localhost:3306/smartbooster-sandbox?serverVersion=5.7"
+    - APP_MAIL_FROM=travis@smartbooster.io
+    - NGINX_HOST=localhost
 
 services:
   - mysql
@@ -18,7 +21,7 @@ cache:
 before_install:
   - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - composer self-update
-  - cp ci/parameters.yml.build.dist app/config/parameters.yml
+  - cp .env.travis .env
 
 install:
   - export SYMFONY_ENV="test"
@@ -28,7 +31,7 @@ install:
 
 script:
   - make qualimetry
-  - vendor/bin/phpunit tests --coverage-clover=coverage.clover
+  - bin/phpunit tests --coverage-clover=coverage.clover
   - make orm.status ENV=test
   - yarn run encore production
 

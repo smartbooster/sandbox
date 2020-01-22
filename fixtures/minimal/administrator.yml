@@ -1,0 +1,6 @@
+App\Entity\User\Administrator:
+    admin:
+        email:          admin@smartbooster.io
+        lastName:       MIN
+        firstName:      Ad
+        plainPassword:  admin

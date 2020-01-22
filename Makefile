@@ -3,19 +3,29 @@ ENV?=dev
 ## Cache clear
 cc:
 	bin/console --env=$(ENV) cache:clear
+	bin/console cache:warmup
+
+cct: override ENV=test
+cct: cc
 
 ## Database install
 orm.install:
 	bin/console --env=$(ENV) doctrine:database:drop --if-exists --force
 	php bin/console doctrine:database:create --env=$(ENV)
 	php bin/console doctrine:schema:create --env=$(ENV)
-	make load.fixtures
+	make orm.load-minimal
+	make orm.load-fake
 
 orm.status:
 	php bin/console doctrine:schema:validate --env=$(ENV)
 
-load.fixtures:
-	php bin/console doctrine:fixtures:load --no-interaction --env=$(ENV)
+### Minimal
+orm.load-minimal:
+	php bin/console doctrine:fixtures:load --group=minimal --no-interaction --env=$(ENV)
+
+orm.load-fake:
+	php bin/console doctrine:fixtures:load --group=fake --append --no-interaction --env=$(ENV)
+
 
 ## Install and compile assets
 assets:
@@ -24,6 +34,11 @@ assets:
 dev.assets: assets
 dev.assets:
 	 yarn run encore dev
+
+dev.assets-watch: assets
+dev.assets-watch:
+	yarn run encore dev --watch
+daw: dev.assets-watch
 
 deploy.assets: assets
 deploy.assets:
@@ -43,19 +58,26 @@ checkstyle:
 	vendor/bin/phpcs --extensions=php -n --standard=PSR12 --report=full src tests
 
 lint.php:
-	find app src tests -type f -name "*.php" -exec php -l {} \;
+	find config src -type f -name "*.php" -exec php -l {} \;
 
 lint.twig:
-	find app -type f -name "*.twig" | xargs php bin/console lint:twig
+	find templates -type f -name "*.twig" | xargs php bin/console lint:twig
 
 lint.yaml:
-	php bin/console lint:yaml app
+	php bin/console lint:yaml config
+
+lint.xliff:
+	php bin/console lint:xliff translations
+
+lint.container:
+	php bin/console lint:container
+
 
 composer.validate:
 	composer validate composer.json
 
 qa: qualimetry
-qualimetry: checkstyle lint.php lint.twig lint.yaml composer.validate metrics phpstan
+qualimetry: checkstyle lint.php lint.twig lint.yaml lint.xliff lint.container composer.validate metrics phpstan
 
 ## Qualimetry : code-beautifier
 cb: code-beautifier

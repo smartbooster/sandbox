@@ -1,0 +1,6 @@
+App\Entity\User\Administrator:
+    admin{1..10}:
+        email:          '<email()>'
+        lastName:       '<lastName()>'
+        firstName:      '<firstName()>'
+        plainPassword:  admin
