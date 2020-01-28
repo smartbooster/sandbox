@@ -107,6 +107,7 @@ class AdministratorAdmin extends AbstractAdmin
                         'first_options'      => ['label' => 'form.label_password'],
                         'second_options'     => ['label' => 'form.label_password_confirmation'],
                         'options' => array('translation_domain' => 'admin'),
+                        'invalid_message' => 'reset_password.password_must_match',
                     ]
                 )
             ->end()

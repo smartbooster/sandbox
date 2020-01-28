@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use Smart\AuthenticationBundle\Entity\User\PasswordSafeableTrait;
 use Smart\AuthenticationBundle\Entity\User\UserTrait;
 use Smart\AuthenticationBundle\Security\LastLoginInterface;
 use Smart\AuthenticationBundle\Security\SmartUserInterface;
@@ -17,6 +18,7 @@ use Yokai\MessengerBundle\Recipient\EmailRecipientInterface;
  */
 class Administrator implements SmartUserInterface, \Serializable, EmailRecipientInterface, LastLoginInterface
 {
+    use PasswordSafeableTrait;
     use UserTrait;
     use ImportableTrait;
 

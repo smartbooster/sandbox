@@ -12,4 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 class SecurityController extends AbstractSecurityController
 {
     protected $context = 'admin';
+
+    /**
+     * @return string
+     */
+    protected function getDomain()
+    {
+        return $this->context . '.' . $this->container->getParameter('domain');
+    }
 }
