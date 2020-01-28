@@ -43,7 +43,6 @@ security:
         - { path: ^/login$,           roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/forgot_password,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/reset_password,   roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/set_password,     roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/,                 roles: [ROLE_ADMINISTRATOR, IS_AUTHENTICATED_REMEMBERED], host: admin.%domain% }
 
 

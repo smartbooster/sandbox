@@ -5,6 +5,6 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="admin_user_provider" alias="security.user.provider.concrete.admin_user_provider" />
+        <service id="admin_user_provider" alias="security.user.provider.concrete.admin_user_provider" public="true"/>
     </services>
 </container>
