@@ -5,6 +5,7 @@ admin_area:
 _sonata_admin:
     resource: .
     type: sonata_admin
+    host:     "admin.%domain%"
 
 _admin:
     resource: admin

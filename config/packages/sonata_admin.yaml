@@ -17,6 +17,13 @@ sonata_admin:
                 - App\Entity\User\Administrator
 
     dashboard:
+        blocks:
+            -
+                position: left
+                type: sonata.admin.block.admin_list
+            -
+                position: right
+                type: smart_content.block.admin.recent_posts
         groups:
             users:
                 label: dashboard.label_users
@@ -29,3 +36,5 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts: [admin]
+        smart_content.block.admin.recent_posts:
+              contexts: [admin]

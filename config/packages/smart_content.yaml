@@ -1,0 +1,13 @@
+sonata_admin:
+  dashboard:
+      groups:
+          content:
+              label: dashboard_group.label_content
+              icon: '<i class="fa fa-file-text"></i>'
+              label_catalogue: admin
+              items:
+                  - smart_content.admin.post
+                  - smart_content.admin.author
+                  - smart_content.admin.category
+                  - smart_content.admin.tag
+                  - smart_content.admin.media

@@ -33,7 +33,7 @@ security:
                 path:   admin_security_logout
                 target: admin_security_login_form
             remember_me:
-                secret:                "%secret%"
+                secret:                "%kernel.secret%"
                 lifetime:              31536000 # 365 days
                 path:                  /
                 domain:                admin.%domain%

@@ -16,6 +16,7 @@
 /vendor/
 /public/bundles/
 /public/build/
+/public/upload/
 yarn-error.log
 /node_modules
 composer.lock
@@ -42,3 +43,7 @@ yarn.lock
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

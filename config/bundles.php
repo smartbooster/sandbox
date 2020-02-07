@@ -21,6 +21,7 @@ return [
     Smart\SonataBundle\SmartSonataBundle::class => ['all' => true],
     Smart\AuthenticationBundle\SmartAuthenticationBundle::class => ['all' => true],
     Smart\EtlBundle\SmartEtlBundle::class => ['all' => true],
+    Smart\ContentBundle\SmartContentBundle::class => ['all' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['all' => true],
@@ -28,4 +29,7 @@ return [
     Yokai\MessengerBundle\YokaiMessengerBundle::class => ['all' => true],
     Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['all' => true],
     Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['all' => true],
+    Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
+    Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
+    Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
 ];
