@@ -5,7 +5,7 @@ services:
     container_name: ${APPLICATION}-docker-php
     image: smartbooster/php-fpm:builder
     env_file:
-       - .env
+      - .env.dev
     ports:
       - "9000:9000"
     volumes:
@@ -25,15 +25,12 @@ services:
       - .docker/nginx/conf.d/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./var/logs/nginx/:/var/log/nginx
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: ${APPLICATION}-docker-mysql
+    env_file:
+      - .env.dev
     ports:
       - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     hostname: mysql
     volumes:
       - ./var/data/mysql:/var/lib/mysql/:rw
@@ -44,3 +41,4 @@ services:
     hostname: maildev
     ports:
       - "1080:80"
+    command: bin/maildev --web 80 --smtp 25 --hide-extensions STARTTLS
