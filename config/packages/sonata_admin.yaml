@@ -29,3 +29,19 @@ sonata_block:
     blocks:
         sonata.admin.block.admin_list:
             contexts: [admin]
+
+services:
+    admin.extension.action_impersonate:
+        class: Smart\SonataBundle\Admin\Extension\ActionExtension
+        arguments:
+            - impersonate
+
+    admin.user.administrator:
+        class: App\Admin\User\AdministratorAdmin
+        arguments:
+            - ~
+            - App\Entity\User\Administrator
+            - ~
+            - '@yokai_security_token.token_manager'
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: dashboard.label_administrator }

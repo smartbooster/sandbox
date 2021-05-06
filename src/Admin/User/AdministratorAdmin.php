@@ -5,12 +5,12 @@ namespace App\Admin\User;
 use App\Entity\User\Administrator;
 use Smart\AuthenticationBundle\Security\Token;
 use Smart\SonataBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Yokai\MessengerBundle\Sender\SenderInterface;
 use Yokai\SecurityTokenBundle\Manager\TokenManagerInterface;
 
 /**
@@ -23,17 +23,11 @@ class AdministratorAdmin extends AbstractAdmin
      */
     protected $tokenManager;
 
-    /**
-     * @var SenderInterface
-     */
-    protected $messenger;
-
-    public function __construct($code, $class, $baseControllerName, TokenManagerInterface $tokenManager, SenderInterface $messenger)
+    public function __construct($code, $class, $baseControllerName, TokenManagerInterface $tokenManager)
     {
         parent::__construct($code, $class, $baseControllerName);
 
         $this->tokenManager = $tokenManager;
-        $this->messenger = $messenger;
     }
 
     /**
@@ -48,13 +42,32 @@ class AdministratorAdmin extends AbstractAdmin
         if ($object instanceof Administrator) {
             // an ADMIN cannot delete himself
             /** @var Administrator $currentUser */
-            $currentUser = $this->getUser(); //Trick for phpstan -> todo add this in SmartUserInterface and overide getUser()
+            $currentUser = $this->getUser();
             if ($name === static::ACTION_DELETE && $object->getId() === $currentUser->getId()) {
                 return false;
             }
         }
 
         return parent::isGranted($name, $object);
+    }
+
+    /**
+     * @param DatagridMapper $filter
+     *
+     * @return void
+     */
+    protected function configureDatagridFilters(DatagridMapper $filter)
+    {
+        $filter
+            ->add('id', null, ['label' => 'list.label_id'])
+            ->add('email', null, [
+                'show_filter' => true,
+                'label' => 'form.label_email'
+            ])
+            ->add('lastName', null, [
+                'show_filter' => true,
+                'label' => 'form.label_last_name'
+            ]);
     }
 
     /**
@@ -122,16 +135,7 @@ class AdministratorAdmin extends AbstractAdmin
     {
         $token = $this->getTokenManager()->create(Token::RESET_PASSWORD, $object);
 
-        $this->getMessenger()->send(
-            'security.user_created',
-            $object,
-            [
-                '{context}' => 'admin',
-                'token' => $token->getValue(),
-                'domain' => $this->getConfigurationPool()->getContainer()->getParameter('domain'),
-                'security_reset_password_route' => 'admin_security_reset_password'
-            ]
-        );
+        //Todo send link update password
     }
 
     /**
@@ -140,13 +144,5 @@ class AdministratorAdmin extends AbstractAdmin
     private function getTokenManager()
     {
         return $this->tokenManager;
-    }
-
-    /**
-     * @return SenderInterface
-     */
-    protected function getMessenger()
-    {
-        return $this->messenger;
     }
 }
