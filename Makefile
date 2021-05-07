@@ -101,7 +101,7 @@ phpstan:
 
 ## Test : phpunit
 phpunit:
-	./bin/phpunit
+	XDEBUG_MODE=coverage ./bin/phpunit --coverage-text
 
 # ====================
 ## Docker

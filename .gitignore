@@ -22,6 +22,7 @@ composer.lock
 yarn.lock
 .env
 .bash_history
+coverage.xml
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

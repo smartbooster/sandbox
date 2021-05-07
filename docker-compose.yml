@@ -4,8 +4,6 @@ services:
   php:
     container_name: ${APPLICATION}-docker-php
     image: smartbooster/php-fpm:builder
-    env_file:
-      - .env.dev
     ports:
       - "9000:9000"
     volumes:
