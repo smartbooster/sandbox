@@ -9,8 +9,7 @@ class DefaultControllerTest extends WebTestCase
     public function testIndex()
     {
         $client = static::createClient();
-
-        $crawler = $client->request('GET', '/');
+        $client->request('GET', '/');
 
         //Redirect to sonata login
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
