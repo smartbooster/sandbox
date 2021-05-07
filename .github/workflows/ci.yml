@@ -79,6 +79,10 @@ jobs:
         run: make qa
 
       - name: Phunit
-        run: make phpunit
+        run: XDEBUG_MODE=coverage ./bin/phpunit --coverage-clover coverage.xml
         env:
           DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox?serverVersion=8.0"
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: "Upload coverage to Codecov"
+        uses: codecov/codecov-action@v1

@@ -5,9 +5,9 @@
 [![Total Downloads](https://poser.pugx.org/smartbooster/sandbox/downloads)](https://packagist.org/packages/smartbooster/sandbox)
 [![License](https://poser.pugx.org/smartbooster/sandbox/license)](https://packagist.org/packages/smartbooster/sandbox)
 
-[![Build Status](https://api.travis-ci.org/smartbooster/sandbox.png?branch=master)](https://travis-ci.org/smartbooster/sandbox)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/smartbooster/sandbox/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/smartbooster/sandbox/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/smartbooster/sandbox/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/smartbooster/sandbox/?branch=master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/40add41672bf46e38cb67d6a7dd3541d)](https://www.codacy.com/gh/smartbooster/sandbox/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=smartbooster/sandbox&amp;utm_campaign=Badge_Grade)
+[![codecov](https://codecov.io/gh/smartbooster/sandbox/branch/master/graph/badge.svg?token=L5NBMD8BBF)](https://codecov.io/gh/smartbooster/sandbox)
+[![Contributors](https://img.shields.io/github/contributors/smartbooster/sandbox?style=flat-square)](https://github.com/smartbooster/sandbox/graphs/contributors)
 
 ## Overview
 

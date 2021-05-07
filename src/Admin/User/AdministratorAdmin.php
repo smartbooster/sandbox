@@ -127,22 +127,22 @@ class AdministratorAdmin extends AbstractAdmin
         ;
     }
 
-    /**
-     * @param Administrator $object
-     * @return void
-     */
-    public function postPersist($object)
-    {
-        $token = $this->getTokenManager()->create(Token::RESET_PASSWORD, $object);
+    ///**
+    // * @param Administrator $object
+    // * @return void
+    // */
+    //public function postPersist($object)
+    //{
+    //    //$token = $this->getTokenManager()->create(Token::RESET_PASSWORD, $object);
+    //
+    //    //Todo send link update password
+    //}
 
-        //Todo send link update password
-    }
-
-    /**
-     * @return TokenManagerInterface
-     */
-    private function getTokenManager()
-    {
-        return $this->tokenManager;
-    }
+    ///**
+    // * @return TokenManagerInterface
+    // */
+    //private function getTokenManager()
+    //{
+    //    return $this->tokenManager;
+    //}
 }
