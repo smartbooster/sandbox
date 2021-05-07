@@ -33,7 +33,7 @@ assets:
 
 dev.assets: assets
 dev.assets:
-	 yarn run encore dev
+	yarn run encore dev
 
 dev.assets-watch: assets
 dev.assets-watch:
@@ -42,20 +42,26 @@ daw: dev.assets-watch
 
 deploy.assets: assets
 deploy.assets:
-	 yarn run encore production
+	yarn run encore production
 
+## Install
 install:
-	 composer install
-	 yarn install
-	 make dev.assets
-	 make orm.install
+	yarn install
+ifeq ($(ENV),dev)
+	composer install
+	make dev.assets
+else
+	composer install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction
+	make deploy.assets
+endif
+	make orm.install
 
 # ====================
 # Qualimetry rules
 
 cs: checkstyle
 checkstyle:
-	vendor/bin/phpcs --extensions=php -n --standard=PSR12 --report=full src tests
+	vendor/bin/phpcs -n --report=full
 
 lint.php:
 	find config src -type f -name "*.php" -exec php -l {} \;
@@ -70,14 +76,14 @@ lint.xliff:
 	php bin/console lint:xliff translations
 
 lint.container:
-	php bin/console lint:container
+	php bin/console lint:container --no-debug
 
 
 composer.validate:
 	composer validate composer.json
 
 qa: qualimetry
-qualimetry: checkstyle lint.php lint.twig lint.yaml lint.xliff lint.container composer.validate metrics phpstan
+qualimetry: checkstyle lint.php lint.twig lint.yaml lint.xliff lint.container composer.validate phpstan
 
 ## Qualimetry : code-beautifier
 cb: code-beautifier
@@ -95,7 +101,7 @@ phpstan:
 
 ## Test : phpunit
 phpunit:
-	vendor/bin/phpunit tests
+	./bin/phpunit
 
 # ====================
 ## Docker

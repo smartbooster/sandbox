@@ -9,14 +9,13 @@ use Smart\AuthenticationBundle\Security\SmartUserInterface;
 use Smart\EtlBundle\Entity\ImportableTrait;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
-use Yokai\MessengerBundle\Recipient\EmailRecipientInterface;
 
 /**
  * @ORM\Entity()
  * @ORM\Table(name="administrator")
  * @UniqueEntity(fields={"email"})
  */
-class Administrator implements SmartUserInterface, \Serializable, EmailRecipientInterface, LastLoginInterface
+class Administrator implements SmartUserInterface, \Serializable, LastLoginInterface
 {
     use PasswordSafeableTrait;
     use UserTrait;
