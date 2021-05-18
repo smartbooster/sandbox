@@ -8,3 +8,9 @@ parameters:
     checkMissingIterableValueType: false
     symfony:
         container_xml_path: %rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml
+    bootstrapFiles:
+        - %rootDir%/../../../bin/.phpunit/phpunit-9.5-0/vendor/autoload.php
+    ignoreErrors:
+        -
+            message: '#Dotenv.*bootEnv#'
+            path: tests/bootstrap.php

@@ -1,135 +1,177 @@
+# Variables
 ENV?=dev
+SYMFONY=php bin/console
+SHELL = /bin/sh
+HOST_USER := $(shell id -u)
+HOST_GROUP := $(shell id -g)
+export HOST_USER
+export HOST_GROUP
+APPLICATION := smartbooster-sandbox
 
-## Cache clear
-cc:
-	bin/console --env=$(ENV) cache:clear
-	bin/console cache:warmup
+.DEFAULT_GOAL := help
+.PHONY: help
+help:
+	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' ./Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[34m%-20s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[34m##/[33m/'
+	@echo ''
+	@echo '\033[02mTo launch and install the project use the command\033[0m'"\033[01m\033[34m make up\033[0m"', then in another terminal type\033[0m'"\033[01m\033[34m make ssh\033[0m"' followed by\033[0m'"\033[01m\033[34m make install \033[0m"''
 
-cct: override ENV=test
-cct: cc
-
-## Database install
-orm.install:
-	bin/console --env=$(ENV) doctrine:database:drop --if-exists --force
-	php bin/console doctrine:database:create --env=$(ENV)
-	php bin/console doctrine:schema:create --env=$(ENV)
-	make orm.load-minimal
-	make orm.load-fake
-
-orm.status:
-	php bin/console doctrine:schema:validate --env=$(ENV)
-
-### Minimal
-orm.load-minimal:
-	php bin/console doctrine:fixtures:load --group=minimal --no-interaction --env=$(ENV)
-
-orm.load-fake:
-	php bin/console doctrine:fixtures:load --group=fake --append --no-interaction --env=$(ENV)
-
-
-## Install and compile assets
-assets:
-	php bin/console assets:install --symlink --relative --env=$(ENV)
-
-dev.assets: assets
-dev.assets:
-	yarn run encore dev
-
-dev.assets-watch: assets
-dev.assets-watch:
-	yarn run encore dev --watch
-daw: dev.assets-watch
-
-deploy.assets: assets
-deploy.assets:
-	yarn run encore production
-
+##
 ## Install
-install:
+## -------
+.PHONY: install
+install: ## Install the project
 	yarn install
 ifeq ($(ENV),dev)
 	composer install
-	make dev.assets
+	./bin/phpunit install
+	make assets-dev
 else
 	composer install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction
-	make deploy.assets
+	make assets-build
 endif
-	make orm.install
-
-# ====================
-# Qualimetry rules
-
-cs: checkstyle
-checkstyle:
-	vendor/bin/phpcs -n --report=full
-
-lint.php:
-	find config src -type f -name "*.php" -exec php -l {} \;
-
-lint.twig:
-	find templates -type f -name "*.twig" | xargs php bin/console lint:twig
-
-lint.yaml:
-	php bin/console lint:yaml config
-
-lint.xliff:
-	php bin/console lint:xliff translations
-
-lint.container:
-	php bin/console lint:container --no-debug
+	make orm-install
 
 
-composer.validate:
-	composer validate composer.json
+##
+## Development
+## -----------
+.PHONY: debug-env
+debug-env: ## Display environment variables used in the container
+	$(SYMFONY) debug:container --env-vars --env=$(ENV)
 
-qa: qualimetry
-qualimetry: checkstyle lint.php lint.twig lint.yaml lint.xliff lint.container composer.validate phpstan
+.PHONY: cc
+cc: ## Cache clear symfony
+	$(SYMFONY) cache:clear --env=$(ENV)
+	$(SYMFONY) cache:warmup
 
-## Qualimetry : code-beautifier
-cb: code-beautifier
-code-beautifier:
-	vendor/bin/phpcbf --extensions=php --standard=PSR12 src tests
+##
+## Database management
+## -------------------
+.PHONY: orm-install
+orm-install: ## Create the databse + Loading minimales fixtures. For production environnement add ENV=PROD
+	$(SYMFONY) doctrine:database:drop --if-exists --force --env=$(ENV)
+	$(SYMFONY) doctrine:database:create --env=$(ENV)
+	$(SYMFONY) doctrine:schema:create --env=$(ENV)
+	$(SYMFONY) doctrine:migration:version --add --all --no-interaction --env=$(ENV)
+	make orm-load-minimal
+	make orm-load-fake
 
-cpd:
-	vendor/bin/phpcpd --fuzzy src
+.PHONY: orm-status
+orm-status: ## Show ORM status (Migrations, Mapping, Synch). For production environnement add ENV=PROD
+	$(SYMFONY) doctrine:migrations:status --no-interaction --env=$(ENV)
+	$(SYMFONY) doctrine:schema:validate --env=$(ENV)
 
-metrics:
-	vendor/bin/phpmetrics --report-html=build/phpmetrics.html src
+.PHONY: orm-show-diff
+orm-show-diff: ## Dump the SQL needed to update the database schema to match the current mapping metadata.  For production environnement add ENV=PROD
+	$(SYMFONY) doctrine:schema:update --dump-sql --env=$(ENV)
 
-phpstan:
-	vendor/bin/phpstan analyse src --level=6 -c phpstan.neon
+.PHONY: orm-diff
+orm-diff: ## Generate a migration by comparing your current database to your mapping information.
+	$(SYMFONY) doctrine:migra:diff --no-interaction --env=$(ENV)
 
-## Test : phpunit
-phpunit:
+.PHONY: orm-load-minimal
+orm-load-minimal: ## Load fixtures from the minimal group to the database
+	$(SYMFONY) doctrine:fixtures:load --group=minimal --no-interaction --env=$(ENV)
+
+.PHONY: orm-load-fake
+orm-load-fake: ## Load fixtures from the fake group to the database
+	$(SYMFONY) doctrine:fixtures:load --group=fake --append --no-interaction --env=$(ENV)
+
+##
+## Assets
+## ------
+.PHONY: assets-bundle
+assets-bundle:
+	$(SYMFONY) assets:install --symlink --relative --env=$(ENV)
+
+.PHONY: assets-dev ad
+assets-dev: assets-bundle ## Compile the assets in dev mode. Shortcut command "make ad"
+assets-dev:
+	yarn run dev
+ad: assets-dev
+
+.PHONY: assets-watch aw
+assets-watch: ## Enable the watcher on the assets. Shortcut command "make aw"
+	yarn run watch
+aw: assets-watch
+
+.PHONY: assets-build ab
+assets-build: override ENV=prod ## Compile the assets in production mode. Shortcut command "make ab"
+assets-build: assets-bundle
+assets-build:
+	yarn run build
+ab: assets-build
+
+##
+## Tests
+## -----
+.PHONY: phpunit
+phpunit: ## Launch all tests
 	XDEBUG_MODE=coverage ./bin/phpunit --coverage-text
 
-# ====================
-## Docker
+##
+## Qualimetry
+## ----------
+.PHONY: checkstyle cs
+checkstyle: ## PHP Checkstyle
+	vendor/bin/phpcs --extensions=php -n --standard=PSR12 --report=full src tests
+cs: checkstyle
 
-SHELL = /bin/sh
+.PHONY: code-beautifier cb
+code-beautifier: ## Code beautifier (Checkstyle fixer)
+	vendor/bin/phpcbf --extensions=php --standard=PSR12 src tests
+cb: code-beautifier
 
-HOST_USER := $(shell id -u)
-HOST_GROUP := $(shell id -g)
+.PHONY: lint-php lint-twig lint-yaml lint-xliff lint-container
+lint-php: ## Linter PHP
+	find config src -type f -name "*.php" -exec php -l {} \;
+lint-twig: ## Linter Twig
+	find templates -type f -name "*.twig" | xargs $(SYMFONY) lint:twig
+lint-yaml: ## Linter Yaml
+	$(SYMFONY) lint:yaml config
+lint-xliff: ## Linter Xliff for translations
+	$(SYMFONY) lint:xliff translations
+lint-container: ## Linter Container service definitions
+	$(SYMFONY) lint:container --no-debug
 
-export HOST_USER
-export HOST_GROUP
+.PHONY: composer-validate
+composer-validate: ## Validate composer.json and composer.lock
+	composer validate composer.json
 
-APPLICATION := smartbooster-sandbox
+.PHONY: metrics
+metrics: ## Build static analysis from the php in src. Repports available in ./build/index.html
+	cd src && ../vendor/bin/phpmetrics --report-html=../build/phpmetrics.html .
 
-up:
+.PHONY: phpstan
+phpstan: ## Launch PHP Static Analysis
+	vendor/bin/phpstan analyse src tests --level=6 -c phpstan.neon
+
+.PHONY: qualimetry qa
+qualimetry: checkstyle lint-php lint-twig lint-yaml lint-xliff lint-container composer-validate metrics phpstan ## Launch all qualimetry rules. Shortcut "make qa"
+qa: qualimetry
+
+.PHONY: cpd
+cpd: ## Copy paste detector
+	vendor/bin/phpcpd --fuzzy src
+
+##
+## Docker commands
+## ---------------
+.PHONY: up
+up: ## Start the project stack with docker
 	docker-compose up
 
-down:
+down: ## Kill the project stack with docker
 	docker-compose down
 
-ps:
+ps: ## List containers from project
 	docker-compose ps
 
-ssh:
+ssh: ## Access to the php container in interactive mode
 	docker exec -it --user=dev $(APPLICATION)-docker-php bash
 
-nginx:
+nginx: ## Access to the nginx container in interactive mode
 	docker exec -it --user=www-data ${APPLICATION}-docker-nginx bash
 
-mysql:
+mysql: ## Access to the mysql container in interactive mode
 	docker exec -it --user=mysql ${APPLICATION}-docker-mysql bash

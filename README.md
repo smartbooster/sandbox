@@ -21,6 +21,9 @@ This project is a testing ground for smartbooster bundles
 ## Installation
 
     composer create-project smartbooster/sandbox
+    make up
+    # when docker has finished setting up the containers, open another tab in your terminal
+    make ssh
     make install
 
 
