@@ -1,13 +1,9 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
 parameters:
-    mailer_transport: smtp
-    mailer_host: '%env(MAILER_HOST)%'
-    mailer_user: '%env(MAILER_USER)%'
-    mailer_password: '%env(MAILER_PASSWORD)%'
     secret: '%env(APP_SECRET)%'
     domain: '%env(DOMAIN)%'
-    mail_from: '%env(APP_MAIL_FROM)%'
+    app.mail_from: '%env(APP_MAIL_FROM)%'
 
 services:
     # default configuration for services in *this* file

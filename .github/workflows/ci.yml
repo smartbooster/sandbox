@@ -65,7 +65,7 @@ jobs:
           DATABASE_VERSION: "8.0"
 
       - name: Database status
-        run: make orm.status
+        run: make orm-status
         env:
           DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox"
           DATABASE_VERSION: "8.0"
@@ -76,6 +76,10 @@ jobs:
 
       - name: Check the Symfony console
         run: bin/console about
+
+      # We install phpunit before the QA to have the autoload bootstrap files used in phpstan config
+      - name: Phpunit Install
+        run: ./bin/phpunit install
 
       - name: Qualimetry
         run: make qa
