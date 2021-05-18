@@ -49,6 +49,7 @@ install:
 	yarn install
 ifeq ($(ENV),dev)
 	composer install
+	./bin/phpunit install
 	make dev.assets
 else
 	composer install --verbose --prefer-dist --optimize-autoloader --no-progress --no-interaction

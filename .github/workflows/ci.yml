@@ -61,12 +61,14 @@ jobs:
       - name: Install CI
         run: make install ENV=test
         env:
-          DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox?serverVersion=8.0"
+          DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox"
+          DATABASE_VERSION: "8.0"
 
       - name: Database status
         run: make orm.status
         env:
-          DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox?serverVersion=8.0"
+          DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox"
+          DATABASE_VERSION: "8.0"
 
       # —— Symfony 🎵 ——————————————————————————————————————————————————————————
       - name: Check Symfony requirements
@@ -81,7 +83,8 @@ jobs:
       - name: Phunit
         run: XDEBUG_MODE=coverage ./bin/phpunit --coverage-clover coverage.xml
         env:
-          DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox?serverVersion=8.0"
+          DATABASE_URL: "mysql://user:password@mysql:${{ job.services.mysql.ports[3306] }}/smartbooster-sandbox"
+          DATABASE_VERSION: "8.0"
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: "Upload coverage to Codecov"

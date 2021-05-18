@@ -6,7 +6,7 @@ parameters:
     mailer_user: '%env(MAILER_USER)%'
     mailer_password: '%env(MAILER_PASSWORD)%'
     secret: '%env(APP_SECRET)%'
-    domain: '%env(NGINX_HOST)%'
+    domain: '%env(DOMAIN)%'
     mail_from: '%env(APP_MAIL_FROM)%'
 
 services:

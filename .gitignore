@@ -1,48 +1,38 @@
-/.web-server-pid
-/app/config/parameters.yml
-/build/
-/phpunit.xml
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/log
-/var/log/*
-!var/log/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
-/vendor/
-/public/bundles/
-/public/build/
-yarn-error.log
-/node_modules
 composer.lock
 yarn.lock
-.env
 .bash_history
 coverage.xml
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/var/
+/var/data/*
+/var/cache/*
+!/var/cache/.gitkeep
+/var/log/php/*
+!/var/log/php/.gitkeep
+/var/log/nginx/*
+!/var/log/nginx/.gitkeep
+/var/sessions
 /vendor/
 ###< symfony/framework-bundle ###
-
-###> squizlabs/php_codesniffer ###
-/.phpcs-cache
-/phpcs.xml
-###< squizlabs/php_codesniffer ###
 
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+
+### phpmetrics
+/build
 
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
