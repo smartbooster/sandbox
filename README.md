@@ -32,3 +32,7 @@ This project is a testing ground for smartbooster bundles
 Pull requests are welcome.
 
 Thanks to [everyone who has contributed](https://github.com/smartbooster/sandbox/contributors) already.
+
+---
+
+*This project is supported by [SmartBooster](https://www.smartbooster.io)*
