@@ -7,11 +7,14 @@
     <arg name="cache" value=".phpcs-cache"/>
     <arg name="colors"/>
     <arg name="extensions" value="php"/>
+    <arg name="warning-severity" value="0"/>
 
-    <rule ref="PSR12"/>
+    <rule ref="PSR12">
+        <properties>
+            <property name="lineLimit" value="160"/> <!-- maximum line length -->
+        </properties>
+    </rule>
 
-    <file>config/</file>
-    <file>public/</file>
     <file>src/</file>
     <file>tests/</file>
 

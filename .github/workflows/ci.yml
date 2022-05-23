@@ -13,7 +13,7 @@ jobs:
   build_test:
     runs-on: ubuntu-latest
     name: Build and test
-    container: smartbooster/php-fpm:builder
+    container: smartbooster/php-fpm:7.4-builder
     services:
       # https://docs.docker.com/samples/library/mysql/
       mysql:
