@@ -15,6 +15,9 @@ sonata_admin:
         admin.extension.action_impersonate:
             instanceof:
                 - App\Entity\User\Administrator
+        admin.extension.action_send_account_creation_email:
+            instanceof:
+                - App\Entity\User\Administrator
 
     dashboard:
         groups:
@@ -41,7 +44,6 @@ services:
         arguments:
             - ~
             - App\Entity\User\Administrator
-            - ~
-            - '@yokai_security_token.token_manager'
+            - App\Controller\Admin\CRUD\User\AdministratorController
         tags:
             - { name: sonata.admin, manager_type: orm, label: dashboard.label_administrator }

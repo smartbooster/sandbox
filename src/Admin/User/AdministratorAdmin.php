@@ -3,31 +3,23 @@
 namespace App\Admin\User;
 
 use App\Entity\User\Administrator;
-use Smart\AuthenticationBundle\Security\Token;
 use Smart\SonataBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Yokai\SecurityTokenBundle\Manager\TokenManagerInterface;
 
 /**
  * @author Nicolas Bastien <nicolas.bastien@smartbooster.io>
  */
 class AdministratorAdmin extends AbstractAdmin
 {
-    /**
-     * @var TokenManagerInterface
-     */
-    protected $tokenManager;
-
-    public function __construct($code, $class, $baseControllerName, TokenManagerInterface $tokenManager)
+    protected function configureRoutes(RouteCollection $collection): void
     {
-        parent::__construct($code, $class, $baseControllerName);
-
-        $this->tokenManager = $tokenManager;
+        $collection->add('sendAccountCreationEmail', $this->getRouterIdParameter() . '/sendAccountCreationEmail');
     }
 
     /**
@@ -126,23 +118,4 @@ class AdministratorAdmin extends AbstractAdmin
             ->end()
         ;
     }
-
-    ///**
-    // * @param Administrator $object
-    // * @return void
-    // */
-    //public function postPersist($object)
-    //{
-    //    //$token = $this->getTokenManager()->create(Token::RESET_PASSWORD, $object);
-    //
-    //    //Todo send link update password
-    //}
-
-    ///**
-    // * @return TokenManagerInterface
-    // */
-    //private function getTokenManager()
-    //{
-    //    return $this->tokenManager;
-    //}
 }
