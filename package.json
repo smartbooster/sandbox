@@ -6,11 +6,10 @@
     "build": "encore production --progress"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.28.2",
+    "@symfony/webpack-encore": "^1.0.0",
     "bootstrap-sass": "^3.3.7",
-    "node-sass": "^4.8.3",
     "sass": "^1.23.7",
-    "sass-loader": "^7.0.1",
+    "sass-loader": "^12.0.0",
     "webpack-notifier": "^1.6.0"
   }
 }
