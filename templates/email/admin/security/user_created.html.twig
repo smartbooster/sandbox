@@ -1,1 +1,38 @@
-{% extends '@SmartAuthentication/email/user_created.html.twig' %}
+{% extends '@SmartAuthentication/email/layout.html.twig' %}
+{% trans_default_domain 'email' %}
+{% import '@SmartAuthentication/macros/email.html.twig' as macro %}
+
+{# Generate variable default value if not define for documentation #}
+{% if domain is not defined %}{% set domain = 'localhost' %}{% endif %}
+{% if security_reset_password_route is not defined %}{% set security_reset_password_route = 'admin_security_reset_password' %}{% endif %}
+{% if token is not defined %}{% set token = '%token%' %}{% endif %}
+
+{% block documentation_help %}
+    <p class="text-muted">
+        {{ 'reset_password.link.documentation_help'|trans({
+            '%action%': 'user_created.reset_password.link'|trans
+        })|raw }}
+    </p>
+{% endblock %}
+
+{% block content %}
+    <p>
+        {{ 'user_created.welcome'|trans|raw }}
+    </p>
+    <p>
+        {{ 'user_created.action.click'|trans }}
+        <br />
+        {% set url = 'https://' ~ domain ~ path(security_reset_password_route, { token: token }) %}
+        {% block link %}
+            {{ macro.renderLink(url, 'user_created.reset_password.link'|trans) }}
+        {% endblock %}
+    </p>
+    <p>
+        {{ 'forgot_password.action.copy_paste'|trans }}
+        <br />
+        {{ macro.renderLink(url, url) }}
+    </p>
+    <p>
+        {{ 'security.token.information'|trans }}
+    </p>
+{% endblock %}

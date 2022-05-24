@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- Smart Email translation -->
+            <trans-unit id="smart.email.general_info">
+                <source>smart.email.general_info</source>
+                <target><![CDATA[
+                    <p>Cette page sert à valider le contenu et le design des emails envoyés.</p>
+                    <p>Ces emails étant dynamiques et dépendants du contexte, les boutons d'action sont factices et les paramètres dynamiques sont affichés entre signe pourcentage %paramètre%.</p>
+                    <p>Vous trouverez le descriptif des fonctionnalités des boutons/liens directement intégré en bas de chaque email.</p>
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="smart.email.subject">
+                <source>smart.email.subject</source>
+                <target>Objet du mail</target>
+            </trans-unit>
+            <trans-unit id="smart.email.recipient">
+                <source>smart.email.recipient</source>
+                <target>Destinataire</target>
+            </trans-unit>
+            <trans-unit id="smart.email.test_form_help">
+                <source>smart.email.test_form_help</source>
+                <target>Envoyer cet email pour tester sa délivrabilité</target>
+            </trans-unit>
+            <trans-unit id="smart.email.test_form.email_error">
+                <source>smart.email.test_form.email_error</source>
+                <target><![CDATA[
+                    Adresse email <b>%recipient%</b> non valide. L'email n'a pas été envoyé.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="smart.email.test_form.success">
+                <source>smart.email.test_form.success</source>
+                <target><![CDATA[
+                    Mail <b>#%code%</b> envoyé à <b>%recipient%</b>
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="smart.email.empty_recipient_error">
+                <source>smart.email.empty_recipient_error</source>
+                <target>Pas de destinataire renseigné pour l'email avec code %code%</target>
+            </trans-unit>
+            <trans-unit id="smart.email.missing_category">
+                <source>smart.email.missing_category</source>
+                <target>Traduction manquante du groupe d'email</target>
+            </trans-unit>
+            <trans-unit id="smart.email.missing_title">
+                <source>smart.email.missing_title</source>
+                <target>Traduction manquante du titre de l'email</target>
+            </trans-unit>
+            <trans-unit id="smart.email.missing_subject">
+                <source>smart.email.missing_subject</source>
+                <target>Traduction manquante de l'objet de l'email</target>
+            </trans-unit>
+            <trans-unit id="email.domain_admin">
+                <source>email.domain_admin</source>
+                <target>Backoffice</target>
+            </trans-unit>
+
+            <!-- Project specific email trad -->
+            <trans-unit id="email.signature">
+                <source>email.signature</source>
+                <target><![CDATA[
+                    Cordialement,<br>
+                    L'équipe Smartbooster.
+                ]]></target>
+            </trans-unit>
+            <trans-unit id="admin.security.forgot_password.doc_title">
+                <source>admin.security.forgot_password.doc_title</source>
+                <target>Réinitialisation de mot de passe Backoffice</target>
+            </trans-unit>
+            <trans-unit id="admin.security.forgot_password.subject">
+                <source>admin.security.forgot_password.subject</source>
+                <target>Demande de changement de mot de passe</target>
+            </trans-unit>
+            <trans-unit id="admin.security.user_created.doc_title">
+                <source>admin.security.user_created.doc_title</source>
+                <target>Finaliser votre compte Backoffice</target>
+            </trans-unit>
+            <trans-unit id="admin.security.user_created.subject">
+                <source>admin.security.user_created.subject</source>
+                <target>Pour finaliser votre compte, merci d'initialiser votre mot de passe</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,8 @@
+{% macro trans_check(message, fallback_undefined_message, domain) %}
+    {% set translated_message = message|trans({}, domain) %}
+    {% if message == translated_message %}
+        <span class="text-red">{{ fallback_undefined_message|trans({}, domain) }} - <em>{{ message }}</em></span>
+    {% else %}
+        {{ translated_message }}
+    {% endif %}
+{% endmacro %}

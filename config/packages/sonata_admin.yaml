@@ -27,6 +27,13 @@ sonata_admin:
                 icon: '<i class="fa fa-users"></i>'
                 items:
                     - admin.user.administrator
+            documentations:
+                label: dashboard.label_documentations
+                label_catalogue: admin
+                icon: '<i class="fa fa-book"></i>'
+                items:
+                    - route: documentation_email
+                      label: dashboard.label_documentation_email
 
 sonata_block:
     blocks:

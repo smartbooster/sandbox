@@ -25,6 +25,14 @@
                 <source>breadcrumb.link_administrator_create</source>
                 <target>Création d'un administrateur</target>
             </trans-unit>
+            <trans-unit id="dashboard.label_documentations">
+                <source>dashboard.label_documentations</source>
+                <target>Documentations</target>
+            </trans-unit>
+            <trans-unit id="dashboard.label_documentation_email">
+                <source>dashboard.label_documentation_email</source>
+                <target>Email</target>
+            </trans-unit>
 
             <!-- Form fieldset -->
             <trans-unit id="fieldset.label_general">

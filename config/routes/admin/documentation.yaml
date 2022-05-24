@@ -1,0 +1,4 @@
+documentation_email:
+  path: /email
+  methods: [GET, POST]
+  controller: App\Controller\Admin\DocumentationController:email

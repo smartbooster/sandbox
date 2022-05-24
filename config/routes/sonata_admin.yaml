@@ -11,6 +11,10 @@ _admin:
     host:     "admin.%domain%"
     type:     directory
 
+_documentation:
+    resource: admin/documentation.yaml
+    prefix: /documentation
+
 admin_dashboard:
     path:    /
     host:     "admin.%domain%"

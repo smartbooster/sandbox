@@ -1,0 +1,22 @@
+{% extends "@SmartSonata/standard_layout.html.twig" %}
+
+{% trans_default_domain 'admin' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('sonata_admin_dashboard') }}"><i class="fa fa-home"></i></a></li>
+    <li><span style="color: #fff;">{{ 'dashboard.label_documentations'|trans }}</span></li>
+    <li class="active"><span>{% block title %}{% endblock %}</span></li>
+{% endblock %}
+
+{% block sonata_admin_content %}
+    <div class="documentation">
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-8">
+                {% block notice %}
+                    {% include ['@SonataCore/FlashMessage/render.html.twig', '@SonataTwig/FlashMessage/render.html.twig'] %}
+                {% endblock notice %}
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
