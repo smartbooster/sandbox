@@ -1,0 +1,6 @@
+{# We use the special ! prefix to avoid infinite loop https://symfony.com/doc/current/bundles/override.html#templates #}
+{% extends '@!SmartSonata/email/layout.html.twig' %}
+
+{% block header_content %}
+    <img src="{{ 'http://localhost/' ~ asset('images/logo/smartbooster-logo.svg') }}" alt="">
+{% endblock %}

@@ -32,7 +32,7 @@ sonata_admin:
                 label_catalogue: admin
                 icon: '<i class="fa fa-book"></i>'
                 items:
-                    - route: documentation_email
+                    - route: smart_sonata_documentation_email
                       label: dashboard.label_documentation_email
 
 sonata_block:

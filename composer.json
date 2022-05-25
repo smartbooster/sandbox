@@ -23,6 +23,7 @@
         "smartbooster/authentication-bundle": "^1.0@dev",
         "smartbooster/etl-bundle": "^1.0@dev",
         "smartbooster/parameter-bundle": "^1.0@dev",
+        "smartbooster/sonata-bundle": "^1.0@dev",
         "sonata-project/admin-bundle": "^3.56",
         "symfony/asset": "^4.4",
         "symfony/dotenv": "4.4.*",

@@ -1,0 +1,8 @@
+smart_sonata:
+    sender:
+        name: 'SB Sandbox'
+        address: '%app.mail_from%'
+    translate_email: true
+    emails:
+        - admin.security.forgot_password
+        - admin.security.account_creation
