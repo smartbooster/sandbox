@@ -13,7 +13,7 @@ jobs:
   build_test:
     runs-on: ubuntu-latest
     name: Build and test
-    container: smartbooster/php-fpm:builder
+    container: smartbooster/php-fpm:7.4-builder
     services:
       # https://docs.docker.com/samples/library/mysql/
       mysql:
@@ -81,9 +81,6 @@ jobs:
       - name: Phpunit Install
         run: ./bin/phpunit install
 
-      - name: Qualimetry
-        run: make qa
-
       - name: Phunit
         run: XDEBUG_MODE=coverage ./bin/phpunit --coverage-clover coverage.xml
         env:
@@ -93,3 +90,6 @@ jobs:
 
       - name: "Upload coverage to Codecov"
         uses: codecov/codecov-action@v1
+
+      - name: Qualimetry
+        run: make qa

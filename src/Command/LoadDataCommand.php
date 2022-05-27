@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Entity\User\Administrator;
 use Smart\EtlBundle\Extractor\YamlEntityExtractor;
 use Smart\EtlBundle\Loader\DoctrineInsertUpdateLoader;
-use Smart\EtlBundle\Transformer\CallbackTransformer;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -53,6 +52,7 @@ class LoadDataCommand extends ContainerAwareCommand
         $this->extractor->addEntityToProcess(
             'administrator',
             Administrator::class,
+            // @phpstan-ignore-next-line
             function ($e) {
                 return $e->getImportId();
             }
@@ -63,6 +63,7 @@ class LoadDataCommand extends ContainerAwareCommand
 
         $this->loader->addEntityToProcess(
             Administrator::class,
+            // @phpstan-ignore-next-line
             function ($e) {
                 return $e->getImportId();
             },

@@ -2,6 +2,10 @@ admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     host:     "admin.%domain%"
 
+smart_sonata:
+    resource: "@SmartSonataBundle/config/routing.yaml"
+    host:     "admin.%domain%"
+
 _sonata_admin:
     resource: .
     type: sonata_admin

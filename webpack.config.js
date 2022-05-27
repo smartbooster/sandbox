@@ -13,17 +13,10 @@ Encore
 
     // allow sass/scss files to be processed
     // https://symfony.com/doc/3.4/frontend/encore/bootstrap.html
-    .enableSassLoader(function(sassOptions) {
-        // https://github.com/sass/node-sass#options
-        sassOptions.includePaths = ['vendor']
-        sassOptions.implementation = require('sass')
-    }, {
-        resolveUrlLoader: false
-    })
-
+    .enableSassLoader()
 
     // allow legacy applications to use $/jQuery as a global variable
-    .autoProvidejQuery()
+    //.autoProvidejQuery()
 
     .enableSourceMaps(!Encore.isProduction())
 

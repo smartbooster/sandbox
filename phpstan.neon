@@ -6,11 +6,16 @@ includes:
 
 parameters:
     checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
     symfony:
-        container_xml_path: %rootDir%/../../../var/cache/dev/srcApp_KernelDevDebugContainer.xml
-    bootstrapFiles:
-        - %rootDir%/../../../bin/.phpunit/phpunit-9.5-0/vendor/autoload.php
+        container_xml_path: var/cache/dev/srcApp_KernelDevDebugContainer.xml
     ignoreErrors:
         -
             message: '#Dotenv.*bootEnv#'
             path: tests/bootstrap.php
+        # https://accesto.com/blog/how-to-ensure-php-code-quality-static-analysis-using-phpstan-with-symfony/
+        # uncomment when an undefined repository method is catch by phpstan
+        #- '#Call to an undefined method Doctrine\\ORM\\EntityRepository<.+>::.+#'
+    # https://github.com/symfony/symfony/issues/36202#issuecomment-769226149
+    bootstrapFiles:
+        - bin/.phpunit/phpunit-9.5-0/vendor/autoload.php

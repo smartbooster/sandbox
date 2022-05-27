@@ -25,7 +25,7 @@
                 <source>breadcrumb.link_administrator_create</source>
                 <target>New administrator</target>
             </trans-unit>
-            
+
             <!-- Form fieldset -->
             <trans-unit id="fieldset.label_general">
                 <source>fieldset.label_general</source>

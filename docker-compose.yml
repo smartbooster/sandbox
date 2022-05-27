@@ -3,7 +3,7 @@ version: "3"
 services:
   php:
     container_name: smartbooster-sandbox-docker-php
-    image: smartbooster/php-fpm:builder
+    image: smartbooster/php-fpm:7.4-builder
     ports:
       - "9000:9000"
     volumes:
